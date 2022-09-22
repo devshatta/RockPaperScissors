@@ -22,25 +22,31 @@ function getComputerChoice(){
 //Rock ties with rock
 //Rock is beaten by paper
 
-
+// evaluates the result of the round
 function playRound(playerSelection, computerSelection){
     let result;
     let message;
 
-    if (playerSelection == computerSelection){
-        result = "ties";
-    } else if (playerSelection == "rock" && computerSelection == "paper"){
-        result = "lose";
-    } else if (playerSelection == "paper" && computerSelection == "scissor"){
-        result = "lose";
-    } else if (playerSelection == "scissor" && computerSelection == "rock"){
-        result = "lose";
+    if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissor"){
+        if (playerSelection == computerSelection){
+            result = "ties";
+        } else if (playerSelection == "rock" && computerSelection == "paper"){
+            result = "lose";
+        } else if (playerSelection == "paper" && computerSelection == "scissor"){
+            result = "lose";
+        } else if (playerSelection == "scissor" && computerSelection == "rock"){
+            result = "lose";
+        } else {
+            result = "win";
+        }
     } else {
-        result = "win";
+        result = "error";
     }
-
+    
     if (result == "ties"){
         message = `Equal! \n${playerSelection} ties with ${computerSelection}`;
+    } else if (result == "error"){
+        message = `Error! \n${playerSelection} isn't a valid choice`;
     } else if (result == "lose"){
         message = `You lost the round! \n${playerSelection} is beaten by ${computerSelection}`;
     } else {
@@ -50,6 +56,6 @@ function playRound(playerSelection, computerSelection){
     return message;
 }
 
-const playerSelection = "paper";
+const playerSelection = prompt("Write down your choice 'rock,paper or scissor'").toLowerCase();
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
